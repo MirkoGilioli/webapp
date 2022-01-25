@@ -9,14 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: datatonic
-      PROJECT_ID: qwiklabs-gcp-01-312bc3ae231c
     steps:
     - name: Checkout
       uses: actions/checkout@v2
     - uses: google-github-actions/setup-gcloud@master
       with:
         service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        project_id: ${{ env.PROJECT_ID }}
+        project_id: ${{ secrets.PROJECT_ID }}
         export_default_credentials: true
     
     - name: Build Docker Image
@@ -29,5 +28,5 @@ jobs:
     
     - name: Push Docker Image to Artifact Registry
       run: |-
-        docker tag $IMAGE_NAME:latest us-central1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker push us-central1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+        docker tag $IMAGE_NAME:latest us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/images/$IMAGE_NAME:latest
+        docker push us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/images/$IMAGE_NAME:latest
