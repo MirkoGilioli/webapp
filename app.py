@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/hello")
 def hello_world():
-    return "Hello datatonic!"
+    return "AWS is great!"
 
 @app.route("/dev")
 def dev():
